@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>កម្មវិធីបង្កើតប្រវត្តិរូប (CV)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Moul&family=Battambang:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="p-4 md:p-8">
+    <div id="app-container" class="max-w-6xl mx-auto">
+
+        <!-- Login Screen -->
+        <div id="login-screen">
+            <div class="form-section max-w-md mx-auto mt-16">
+                <h1 class="kh-koulen text-3xl text-center text-gray-800 mb-6">ចូលប្រើប្រាស់កម្មវិធី</h1>
+                <form id="login-form">
+                    <div class="mb-4">
+                        <label for="username" class="block text-gray-700 font-bold mb-2">ឈ្មោះអ្នកប្រើ (Username)</label>
+                        <input type="text" id="username" class="form-input" value="" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="block text-gray-700 font-bold mb-2">ពាក្យសម្ងាត់ (Password)</label>
+                        <input type="password" id="password" class="form-input" value="" required>
+                    </div>
+                    <p id="login-error" class="text-red-500 text-center mb-4 hidden">ឈ្មោះអ្នកប្រើ ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ!</p>
+                    <button type="submit" class="btn btn-primary w-full">ចូល (Login)</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- CV Form Screen -->
+        <div id="form-screen" class="hidden">
+            <h1 class="kh-koulen text-4xl text-center text-gray-800 mb-8">កម្មវិធីបង្កើតប្រវត្តិរូប</h1>
+            <form id="cv-form">
+                
+                <div class="form-section">
+                     <h2 class="kh-moul text-2xl border-b-2 border-blue-500 pb-2 mb-6">ប្រវត្តិរូបសង្ខេប</h2>
+                     <div class="flex flex-col md:flex-row gap-8">
+                        <div class="w-full md:w-1/4 text-center">
+                             <img id="profile-pic-preview" src="https://placehold.co/200x250/e2e8f0/adb5bd?text=រូបថត" alt="Profile Picture Preview" class="w-48 h-60 object-cover mx-auto rounded-lg shadow-md mb-4">
+                             <label for="profile-pic" class="btn btn-secondary cursor-pointer">ជ្រើសរើសរូបថត</label>
+                             <input type="file" id="profile-pic" class="hidden" accept="image/*">
+                        </div>
+                        <div class="w-full md:w-3/4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="font-bold">ឈ្មោះ</label><input type="text" id="name-kh" class="form-input" placeholder=""></div>
+                            <div><label class="font-bold">ឈ្មោះឡាតាំង</label><input type="text" id="name-en" class="form-input" placeholder=""></div>
+                            <div><label class="font-bold">ភេទ</label><select id="gender" class="form-input"><option>ប្រុស</option><option>ស្រី</option></select></div>
+                            <div><label class="font-bold">ថ្ងៃខែឆ្នាំកំណើត</label><input type="text" id="dob" class="form-input" placeholder=""></div>
+                            <div class="md:col-span-2"><label class="font-bold">ទីកន្លែងកំណើត</label><input type="text" id="pob" class="form-input" placeholder="ភូមិ, ឃុំ/សង្កាត់, ស្រុក/ខណ្ឌ, ខេត្ត/រាជធានី"></div>
+                            <div class="md:col-span-2"><label class="font-bold">អាស័យដ្ឋាននៅខ្មែរ</label><input type="text" id="address-kh" class="form-input" placeholder="ភូមិ, ឃុំ/សង្កាត់, ស្រុក/ខណ្ឌ, ខេត្ត/រាជធានី"></div>
+                             <div><label class="font-bold">ស្ថានភាពគ្រួសារ</label><select id="marital-status" class="form-input"><option>នៅលីវ</option><option>រៀបការរួច</option></select></div>
+                            <div><label class="font-bold">កម្រិតវប្បធម៌</label><input type="text" id="education" class="form-input" placeholder=""></div>
+                            <div><label class="font-bold">អត្តសញ្ញាណប័ណ្ណ</label><input type="text" id="id-card" class="form-input" placeholder="100686621"></div>
+                            <div><label class="font-bold">លេខលិខិតឆ្លងដែន</label><input type="text" id="passport-no" class="form-input" placeholder="N00272133"></div>
+                             <div><label class="font-bold">លេខទូរស័ព្ទនៅកូរ៉េ</label><input type="tel" id="phone-kr" class="form-input" placeholder="086 278 717"></div>
+                             <div><label class="font-bold">Facebook</label><input type="url" id="facebook" class="form-input" placeholder="https://facebook.com/..."></div>
+                             <div class="md:col-span-2"><label class="font-bold">TikTok</label><input type="url" id="tiktok" class="form-input" placeholder="https://tiktok.com/..."></div>
+                        </div>
+                     </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="kh-moul text-4xl border-b-2 border-blue-500 pb-2 mb-6">ស្ថានភាពនៅសាធារណរដ្ឋកូរ៉េ</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label class="font-bold">ថ្ងៃចេញដំណើរ</label><input type="text" id="departure-date" class="form-input" placeholder="១៧ សីហា ២០២២"></div>
+                        <div><label class="font-bold">មុខរបរ</label><input type="text" id="occupation-kr" class="form-input" placeholder="ពលករផ្នែកឧស្សាហកម្ម"></div>
+                        <div class="md:col-span-2"><label class="font-bold">អាសយដ្ឋាននៅកូរ៉េ</label><input type="text" id="address-kr" class="form-input" placeholder="(464-863) Gyeonggi-do Gwangju-si Chowol-eup"></div>
+                        <div class="md:col-span-2"><label class="font-bold">មុខងារក្នុងបក្ស</label><textarea id="party-role" class="form-input" rows="2" placeholder="គ្មាន (រិះគន់រដ្ឋាភិបាលក្នុងបណ្តាញសង្គម)"></textarea></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                     <h2 class="kh-moul text-2xl border-b-2 border-blue-500 pb-2 mb-6">ស្ថានភាពគ្រួសារ</h2>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                        <div class="border p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-2">ឪពុក</h3>
+                            <div class="space-y-2">
+                                <div><label>ឈ្មោះ</label><input type="text" id="father-name" class="form-input"></div>
+                                <div><label>ថ្ងៃខែឆ្នាំកំណើត</label><input type="text" id="father-dob" class="form-input"></div>
+                                <div><label>មុខរបរ</label><input type="text" id="father-occupation" class="form-input"></div>
+                            </div>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-2">ម្តាយ</h3>
+                            <div class="space-y-2">
+                                <div><label>ឈ្មោះ</label><input type="text" id="mother-name" class="form-input"></div>
+                                <div><label>ថ្ងៃខែឆ្នាំកំណើត</label><input type="text" id="mother-dob" class="form-input"></div>
+                                <div><label>មុខរបរ</label><input type="text" id="mother-occupation" class="form-input"></div>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2"><label class="font-bold">អាសយដ្ឋានគ្រួសារបច្ចុប្បន្ន</label><input type="text" id="family-address" class="form-input"></div>
+                     </div>
+                     <div class="mt-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-lg">បងប្អូនបង្កើត</h3>
+                            <button type="button" id="add-sibling-btn" class="btn btn-primary">+</button>
+                        </div>
+                        <div id="siblings-container" class="space-y-2"></div>
+                     </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="kh-moul text-2xl border-b-2 border-blue-500 pb-2 mb-6">ឯកសារយោង</h2>
+                    <label for="reference-docs" class="btn btn-secondary cursor-pointer">ជ្រើសរើសឯកសារ (ច្រើន)</label>
+                    <input type="file" id="reference-docs" class="hidden" multiple accept="image/*">
+                    <div id="reference-docs-list" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+                </div>
+
+                <div class="text-center">
+                     <button type="submit" class="btn btn-success text-xl kh-koulen">បញ្ជូន និងបង្កើត CV</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- CV Preview Screen -->
+        <div id="cv-preview-screen" class="hidden">
+            <div class="no-print flex justify-center items-center flex-wrap gap-4 mb-8">
+                <button id="edit-btn" class="btn btn-secondary">កែសម្រួលទិន្នន័យ</button>
+                <button id="print-btn" class="btn btn-primary">បោះពុម្ព CV</button>
+                <button id="download-btn" class="btn btn-success">ទាញយកជា PDF</button>
+            </div>
+            
+            <div id="cv-output" class="p-6 md:p-10 mx-auto max-w-4xl border">
+                 <!-- CV content will be generated here -->
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Screen elements
+    const loginScreen = document.getElementById('login-screen');
+    const formScreen = document.getElementById('form-screen');
+    const cvPreviewScreen = document.getElementById('cv-preview-screen');
+    
+    // Login elements
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+
+    // Form elements
+    const cvForm = document.getElementById('cv-form');
+    const profilePicInput = document.getElementById('profile-pic');
+    const profilePicPreview = document.getElementById('profile-pic-preview');
+    const addSiblingBtn = document.getElementById('add-sibling-btn');
+    const siblingsContainer = document.getElementById('siblings-container');
+    const referenceDocsInput = document.getElementById('reference-docs');
+    const referenceDocsList = document.getElementById('reference-docs-list');
+
+    // CV Preview elements
+    const cvOutput = document.getElementById('cv-output');
+    const editBtn = document.getElementById('edit-btn');
+    const printBtn = document.getElementById('print-btn');
+    const downloadBtn = document.getElementById('download-btn');
+
+    let siblingCount = 0;
+
+    // --- LOGIN LOGIC ---
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        if (username === 'PANHA' && password === 'MtosB') {
+            loginScreen.classList.add('hidden');
+            formScreen.classList.remove('hidden');
+            addSiblingField(); 
+        } else {
+            loginError.classList.remove('hidden');
+        }
+    });
+
+    // --- FORM LOGIC ---
+    profilePicInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            profilePicPreview.src = URL.createObjectURL(file);
+        }
+    });
+    
+    function addSiblingField() {
+        siblingCount++;
+        const siblingFields = `
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 border p-2 rounded-md items-center" id="sibling-group-${siblingCount}">
+                <div class="md:col-span-2"><input type="text" class="form-input sibling-name" placeholder="ឈ្មោះ"></div>
+                <div><select class="form-input sibling-gender"><option>ប្រុស</option><option>ស្រី</option></select></div>
+                <div><input type="text" class="form-input sibling-yob" placeholder="ឆ្នាំកំណើត"></div>
+                <div><input type="text" class="form-input sibling-occupation" placeholder="មុខរបរ"></div>
+            </div>
+        `;
+        siblingsContainer.insertAdjacentHTML('beforeend', siblingFields);
+    }
+    addSiblingBtn.addEventListener('click', addSiblingField);
+
+    referenceDocsInput.addEventListener('change', function(e) {
+        referenceDocsList.innerHTML = '';
+        for (const file of e.target.files) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.className = 'w-full h-auto object-cover rounded-lg shadow-md';
+            referenceDocsList.appendChild(img);
+        }
+    });
+
+    cvForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        generateCV();
+        formScreen.classList.add('hidden');
+        cvPreviewScreen.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    });
+
+    // --- CV GENERATION & ACTIONS ---
+    function generateCV() {
+        const getVal = (id) => document.getElementById(id).value || 'N/A';
+        
+        // Sibling Data
+        let siblingsHtml = '';
+        document.querySelectorAll('[id^="sibling-group-"]').forEach(group => {
+            const name = group.querySelector('.sibling-name').value;
+            if (name) {
+                siblingsHtml += `
+                    <tr>
+                        <td>${name}</td>
+                        <td>${group.querySelector('.sibling-gender').value}</td>
+                        <td>${group.querySelector('.sibling-yob').value}</td>
+                        <td>${group.querySelector('.sibling-occupation').value}</td>
+                    </tr>
+                `;
+            }
+        });
+        const siblingTable = siblingsHtml ? `
+            <table class="text-sm mt-2">
+                <tr class="bg-gray-200">
+                    <td class="font-bold">ឈ្មោះ</td><td class="font-bold">ភេទ</td>
+                    <td class="font-bold">ឆ្នាំកំណើត</td><td class="font-bold">មុខរបរ</td>
+                </tr>
+                ${siblingsHtml}
+            </table>` : '<p>N/A</p>';
+
+        // Reference docs
+        let refDocsHtml = '';
+        const refImages = referenceDocsList.querySelectorAll('img');
+        if (refImages.length > 0) {
+            refDocsHtml += '<h3>ឯកសារយោង</h3><div class="grid grid-cols-2 gap-4 mt-4">';
+            refImages.forEach(img => {
+                refDocsHtml += `<div class="break-inside-avoid"><img src="${img.src}" class="w-full h-auto shadow-md rounded"></div>`;
+            });
+            refDocsHtml += '</div>';
+        }
+
+        cvOutput.innerHTML = `
+            <div class="flex justify-between items-start mb-4">
+                <h1 class="kh-moul text-2xl text-blue-700">ប្រវត្តិរូបសង្ខេប</h1>
+                <img src="${profilePicPreview.src}" alt="Profile" class="w-32 h-40 object-cover rounded shadow-lg border-2 border-white">
+            </div>
+            
+            <h3>ព័ត៌មានផ្ទាល់ខ្លួន</h3>
+            <table>
+                <tr><td>ឈ្មោះ</td><td>${getVal('name-kh')}</td></tr>
+                <tr><td>ឈ្មោះឡាតាំង</td><td>${getVal('name-en').toUpperCase()}</td></tr>
+                <tr><td>ភេទ</td><td>${getVal('gender')}</td></tr>
+                <tr><td>ថ្ងៃខែឆ្នាំកំណើត</td><td>${getVal('dob')}</td></tr>
+                <tr><td>ទីកន្លែងកំណើត</td><td>${getVal('pob')}</td></tr>
+                <tr><td>អាស័យដ្ឋាននៅកម្ពុជា</td><td>${getVal('address-kh')}</td></tr>
+                <tr><td>ស្ថានភាពគ្រួសារ</td><td>${getVal('marital-status')}</td></tr>
+                <tr><td>កម្រិតវប្បធម៌</td><td>${getVal('education')}</td></tr>
+                <tr><td>អត្តសញ្ញាណប័ណ្ណ</td><td>${getVal('id-card')}</td></tr>
+                <tr><td>លេខលិខិតឆ្លងដែន</td><td>${getVal('passport-no')}</td></tr>
+                <tr><td>លេខទូរស័ព្ទនៅកូរ៉េ</td><td>${getVal('phone-kr')}</td></tr>
+                <tr><td>Facebook</td><td>${getVal('facebook')}</td></tr>
+                <tr><td>TikTok</td><td>${getVal('tiktok')}</td></tr>
+            </table>
+
+            <h3>ស្ថានភាពនៅសាធារណរដ្ឋកូរ៉េ</h3>
+            <table>
+                <tr><td>ថ្ងៃចេញដំណើរ</td><td>${getVal('departure-date')}</td></tr>
+                <tr><td>មុខរបរ</td><td>${getVal('occupation-kr')}</td></tr>
+                <tr><td>អាសយដ្ឋានបច្ចុប្បន្ន</td><td>${getVal('address-kr')}</td></tr>
+                <tr><td>មុខងារក្នុងបក្ស</td><td>${getVal('party-role')}</td></tr>
+            </table>
+
+            <h3>ស្ថានភាពគ្រួសារ</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <table>
+                    <tr><td colspan="2" class="text-center font-bold bg-gray-100">ឪពុក</td></tr>
+                    <tr><td>ឈ្មោះ</td><td>${getVal('father-name')}</td></tr>
+                    <tr><td>ថ្ងៃខែឆ្នាំកំណើត</td><td>${getVal('father-dob')}</td></tr>
+                    <tr><td>មុខរបរ</td><td>${getVal('father-occupation')}</td></tr>
+                </table>
+                <table>
+                    <tr><td colspan="2" class="text-center font-bold bg-gray-100">ម្តាយ</td></tr>
+                    <tr><td>ឈ្មោះ</td><td>${getVal('mother-name')}</td></tr>
+                    <tr><td>ថ្ងៃខែឆ្នាំកំណើត</td><td>${getVal('mother-dob')}</td></tr>
+                    <tr><td>មុខរបរ</td><td>${getVal('mother-occupation')}</td></tr>
+                </table>
+            </div>
+            <table class="mt-4">
+                <tr><td>អាសយដ្ឋានគ្រួសារ</td><td>${getVal('family-address')}</td></tr>
+            </table>
+            <h4 class="font-bold mt-4">បងប្អូនបង្កើត:</h4>
+            ${siblingTable}
+            
+            ${refDocsHtml}
+        `;
+    }
+
+    editBtn.addEventListener('click', () => {
+        cvPreviewScreen.classList.add('hidden');
+        formScreen.classList.remove('hidden');
+    });
+
+    printBtn.addEventListener('click', () => window.print());
+
+    downloadBtn.addEventListener('click', () => {
+        const nameEn = document.getElementById('name-en').value || 'CV';
+        const opt = {
+          margin: 0.1,
+          filename: `CV_${nameEn.replace(/\s+/g, '_')}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 5, useCORS: true, letterRendering: true },
+          jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().from(cvOutput).set(opt).save();
+    });
+});
+</script>
+</body>
+</html>
